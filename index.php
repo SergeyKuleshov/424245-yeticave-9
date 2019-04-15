@@ -12,6 +12,50 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
+
+<?php
+    $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+    $ads = [
+        [
+            'title' => '2014 Rossignol District Snowboard',
+            'category' => 'Доски и лыжи',
+            'price' => '10999',
+            'url-pictures' => 'img/lot-1.jpg'
+        ],
+        [
+            'title' => 'DC Ply Mens 2016/2017 Snowboard',
+            'category' => 'Доски и лыжи',
+            'price' => '159999',
+            'url-pictures' => 'img/lot-2.jpg'
+        ],
+        [
+            'title' => 'Крепления Union Contact Pro 2015 года размер L/XL',
+            'category' => 'Крепления',
+            'price' => '8000',
+            'url-pictures' => 'img/lot-3.jpg'
+        ],
+        [
+            'title' => 'Ботинки для сноуборда DC Mutiny Charocal',
+            'category' => 'Ботинки',
+            'price' => '10999',
+            'url-pictures' => 'img/lot-4.jpg'
+        ],
+        [
+            'title' => 'Куртка для сноуборда DC Mutiny Charocal',
+            'category' => 'Одежда',
+            'price' => '7500',
+            'url-pictures' => 'img/lot-5.jpg'
+        ],
+        [
+            'title' => 'Маска Oakley Canopy',
+            'category' => 'Разное',
+            'price' => '5400',
+            'url-pictures' => 'img/lot-6.jpg'
+        ]
+    ];
+    ?>
+
+
 <div class="page-wrapper">
 
 <header class="main-header">
@@ -93,10 +137,21 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
+
             <!--заполните этот список из массива категорий-->
-            <li class="nav__item">
-                <a href="pages/all-lots.html">Название категории</a>
-            </li>
+
+            <?php
+            $index = 0;
+            $num = count($categories);
+            while ($index < $num): ?>
+
+                <li class="nav__item">
+                    <a href="pages/all-lots.html"> <?=$categories[$index];?></a>
+                </li>
+                <?php $index++; ?>
+
+            <?php endwhile; ?>
+
         </ul>
     </nav>
     <div class="main-footer__bottom container">

@@ -5,7 +5,9 @@
 *.pdf
 *.psd
 *.sublime*
+*.swp
 Thumbs.db
 vendor
 uploads/*
 !uploads/.gitkeep
+
