@@ -5,7 +5,10 @@
 *.pdf
 *.psd
 *.sublime*
+*.swp
+*.save
 Thumbs.db
 vendor
 uploads/*
 !uploads/.gitkeep
+
