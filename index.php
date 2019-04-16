@@ -14,6 +14,17 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 <body>
 
 <?php
+
+    function price_formatting($number)
+    {
+        $number = ceil($number);
+        if ($number >= 1000) {
+            $number = number_format($number, 0, "", " ");
+        }
+        $number = $number . " &#8381;";
+        return $number;
+    }
+
     $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
     $ads = [
         [
@@ -130,7 +141,7 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost"><?=$ads[$key]['price']?><b class="rub">р</b></span>
+                                <span class="lot__cost"><?=price_formatting($ads[$key]['price'])?></span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
