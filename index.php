@@ -103,15 +103,11 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 
             <!--заполните этот список из массива категорий-->
 
-            <?php
-            $index = 0;
-            $num = count($categories);
-            while ($index < $num): ?>
+            <?php foreach ($categories as $val): ?>
                 <li class="promo__item promo__item--boards">
-                    <a class="promo__link" href="pages/all-lots.html"><?=$categories[$index];?></a>
+                    <a class="promo__link" href="pages/all-lots.html"><?=$val;?></a>
                 </li>
-                <?php $index++; ?>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
 
         </ul>
     </section>
@@ -123,22 +119,18 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 
             <!--заполните этот список из массива с товарами-->
 
-            <?php
-            $index = 0;
-            $num = count($ads);
-            ?>
             <?php foreach ($ads as $key => $val): ?>
                 <li class="lots__item lot">
                     <div class="lot__image">
                         <img src="" width="350" height="260" alt="">
                     </div>
                     <div class="lot__info">
-                        <span class="lot__category"><?=$ads[$key][category]?></span>
-                        <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=$ads[$key][title]?></a></h3>
+                        <span class="lot__category"><?=$ads[$key]['category']?></span>
+                        <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=$ads[$key]['title']?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost"><?=$ads[$key][price]?><b class="rub">р</b></span>
+                                <span class="lot__cost"><?=$ads[$key]['price']?><b class="rub">р</b></span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
@@ -159,17 +151,13 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 
             <!--заполните этот список из массива категорий-->
 
-            <?php
-            $index = 0;
-            $num = count($categories);
-            while ($index < $num): ?>
+            <?php foreach ($categories as $val ): ?>
 
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"> <?=$categories[$index];?></a>
+                    <a href="pages/all-lots.html"> <?=$val;?></a>
                 </li>
-                <?php $index++; ?>
 
-            <?php endwhile; ?>
+            <?php endforeach; ?>
 
         </ul>
     </nav>
