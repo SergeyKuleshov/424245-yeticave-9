@@ -17,12 +17,7 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 
     function price_formatting($number)
     {
-        $number = ceil($number);
-        if ($number >= 1000) {
-            $number = number_format($number, 0, "", " ");
-        }
-        $number = $number . " &#8381;";
-        return $number;
+        return $number = number_format(ceil($number), 0, "", " ") . " &#8381;";
     }
 
     $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
