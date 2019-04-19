@@ -1,4 +1,7 @@
 <?php
+require_once('helpers.php');
+
+
 $is_auth = rand(0, 1);
 
 $user_name = 'Сергей Кулешов'; // укажите здесь ваше имя
@@ -52,11 +55,13 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
     ];
 
 
-    $page_content = include_template('templates/index.php', ['ads' => $ads]);
-    $layout_content = include_template('templates/layout.php', [
+    $page_content = include_template('index.php', ['ads' => $ads]);
+    $layout_content = include_template('layout.php', [
         'content' => $page_content,
         'categories' => $categories,
-        'title' => 'Yeticave - главная страница'
+        'title' => 'Yeticave - главная страница',
+        'is_auth' => $is_auth,
+        'user_name' => $user_name
     ]);
 
     print($layout_content);
