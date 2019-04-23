@@ -14,7 +14,10 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
         return $number = number_format(ceil($number), 0, "", " ") . " &#8381;";
     }
 
+    //массив категорий
     $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+
+    //массив имитирующий данные товара от пользователя
     $ads = [
         [
             'title' => '2014 Rossignol District Snowboard',
@@ -55,7 +58,29 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
     ];
 
 
-    $page_content = include_template('index.php', ['ads' => $ads]);
+
+    //время
+    date_default_timezone_set("Europe/Moscow");
+
+    $tomorrow_midnight = strtotime("tomorrow midnight");
+    $current_time = time();
+
+    $secs_to_midnight = $tomorrow_midnight - $current_time;
+    $hour = floor($secs_to_midnight / 3600);
+    $minutes = floor($secs_to_midnight % 3600 / 60);
+
+    $time_to_midnight = $hour . ':' . $minutes;
+
+
+    //шаблонизатор
+    $page_content = include_template('index.php', [
+        'ads' => $ads,
+        'time_to_midnight' => $time_to_midnight,
+        'hour' => $hour,
+        'categories' => $categories
+
+    ]);
+
     $layout_content = include_template('layout.php', [
         'content' => $page_content,
         'categories' => $categories,

@@ -1,6 +1,5 @@
 
 
-
     <section class="promo">
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
@@ -37,8 +36,8 @@
                                 <span class="lot__amount">Стартовая цена</span>
                                 <span class="lot__cost"><?=price_formatting($ads[$key]['price']);?></span>
                             </div>
-                            <div class="lot__timer timer">
-                                12:23
+                            <div class="lot__timer timer <?php if ($hour < 1): ?>timer--finishing<?php endif ?>">
+                                <?=$time_to_midnight;?>
                             </div>
                         </div>
                     </div>
