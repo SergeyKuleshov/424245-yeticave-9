@@ -18,7 +18,7 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
     $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 
     //массив имитирующий данные товара от пользователя
-    $ads = [
+    $advertisements = [
         [
             'title' => '2014 Rossignol District Snowboard',
             'category' => 'Доски и лыжи',
@@ -60,21 +60,44 @@ $user_name = 'Сергей Кулешов'; // укажите здесь ваш�
 
 
     //время
-    date_default_timezone_set("Europe/Moscow");
+    function time_to_end($amountOfTimeToFinish) {
 
-    $tomorrow_midnight = strtotime("tomorrow midnight");
-    $current_time = time();
+        date_default_timezone_set("Europe/Moscow");
 
-    $secs_to_midnight = $tomorrow_midnight - $current_time;
-    $hour = floor($secs_to_midnight / 3600);
-    $minutes = floor($secs_to_midnight % 3600 / 60);
+        $timestamp_to_end = strtotime($amountOfTimeToFinish);
+        $current_timestamp = time();
 
-    $time_to_midnight = $hour . ':' . $minutes;
+        $secs_to_end = $timestamp_to_end - $current_timestamp;
+        $hour_to_end = floor($secs_to_end / 3600);
+        $minutes_to_end = floor($secs_to_end % 3600 / 60);
+
+        $time_to_end = $hour_to_end . ':' . $minutes_to_end;
+
+        return $time_to_end;
+
+    }
+
+    $time_to_midnight = time_to_end("tomorrow midnight");
+
+
+
+    function is_less_than_one_hour($time) {
+
+        $first_number = substr($time, 0, 1);
+        $first_int_number = intval($first_number);
+        $one_hour = 1;
+        if ($first_int_number < $one_hour) {
+            return true;
+        }
+    }
+
+    $hour = is_less_than_one_hour($time_to_midnight);
+
 
 
     //шаблонизатор
     $page_content = include_template('index.php', [
-        'ads' => $ads,
+        'advertisements' => $advertisements,
         'time_to_midnight' => $time_to_midnight,
         'hour' => $hour,
         'categories' => $categories
