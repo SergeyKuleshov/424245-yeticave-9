@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `bet` (
   `id` int(11) NOT NULL,
   `date_add` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `current_bet` int(128) NOT NULL,
+  `current_bet` int(11) NOT NULL,
   `lot_id` int(11) NOT NULL,
-  `user_current_winner_id` int(11) NOT NULL
+  `last_better_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -64,10 +64,10 @@ CREATE TABLE `lot` (
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `name` varchar(128) NOT NULL,
   `description` text NOT NULL,
-  `start_price` int(128) NOT NULL,
+  `start_price` int(11) NOT NULL,
   `picture_path` varchar(128) NOT NULL,
   `date_end` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `bet_step` int(128) NOT NULL,
+  `bet_step` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `user_author_id` int(11) NOT NULL,
   `user_winner` int(11) NOT NULL
@@ -86,9 +86,7 @@ CREATE TABLE `users` (
   `name` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
   `avatar_path` varchar(128) NOT NULL,
-  `contact_info` varchar(128) NOT NULL,
-  `created_lot_id` int(11) NOT NULL,
-  `user_bet_id` int(11) NOT NULL
+  `contact_info` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -100,10 +98,8 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `bet`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `lot_id` (`lot_id`),
-  ADD KEY `lot_id_2` (`lot_id`),
-  ADD KEY `lot_id_3` (`lot_id`),
-  ADD KEY `user_current_winner_id` (`user_current_winner_id`);
+  ADD KEY `lot_id` (`lot_id`)
+  ADD KEY `last_better_id` (`last_better_id`);
 
 --
 -- Индексы таблицы `categories`
@@ -124,10 +120,7 @@ ALTER TABLE `lot`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `created_lot_id` (`created_lot_id`),
-  ADD KEY `user_bet_id` (`user_bet_id`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -162,7 +155,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `bet`
   ADD CONSTRAINT `bet_ibfk_1` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`),
-  ADD CONSTRAINT `bet_ibfk_2` FOREIGN KEY (`user_current_winner_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `bet_ibfk_2` FOREIGN KEY (`last_better_id`) REFERENCES `users` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `lot`
@@ -170,13 +163,6 @@ ALTER TABLE `bet`
 ALTER TABLE `lot`
   ADD CONSTRAINT `lot_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `lot_ibfk_2` FOREIGN KEY (`user_author_id`) REFERENCES `users` (`id`);
-
---
--- Ограничения внешнего ключа таблицы `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_bet_id`) REFERENCES `bet` (`id`),
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`created_lot_id`) REFERENCES `lot` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
