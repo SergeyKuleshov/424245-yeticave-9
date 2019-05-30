@@ -29,9 +29,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `bet` (
   `id` int(11) NOT NULL,
   `date_add` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+-- сумма: цена, по которой пользователь готов приобрести лот
   `current_bet` int(11) NOT NULL,
+
   `lot_id` int(11) NOT NULL,
-  `last_better_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -69,8 +72,7 @@ CREATE TABLE `lot` (
   `date_end` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `bet_step` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `user_author_id` int(11) NOT NULL,
-  `user_winner` int(11) NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -99,7 +101,7 @@ CREATE TABLE `users` (
 ALTER TABLE `bet`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lot_id` (`lot_id`)
-  ADD KEY `last_better_id` (`last_better_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `categories`
@@ -113,7 +115,7 @@ ALTER TABLE `categories`
 ALTER TABLE `lot`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`),
-  ADD KEY `user_author_id` (`user_author_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `users`
@@ -155,14 +157,14 @@ ALTER TABLE `users`
 --
 ALTER TABLE `bet`
   ADD CONSTRAINT `bet_ibfk_1` FOREIGN KEY (`lot_id`) REFERENCES `lot` (`id`),
-  ADD CONSTRAINT `bet_ibfk_2` FOREIGN KEY (`last_better_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `bet_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `lot`
 --
 ALTER TABLE `lot`
   ADD CONSTRAINT `lot_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `lot_ibfk_2` FOREIGN KEY (`user_author_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `lot_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
