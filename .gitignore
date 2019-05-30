@@ -7,6 +7,7 @@
 *.sublime*
 *.swp
 *.save
+phpmyadmin
 Thumbs.db
 vendor
 uploads/*
